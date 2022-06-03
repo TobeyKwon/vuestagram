@@ -14,8 +14,10 @@
     :posts="posts"
     :tab="tab"
     :currentImageUrl="currentImageUrl"
+    :curFilter="curFilter"
     @more="more"
     @deliveryContent="content = $event"
+    @changeFilter="curFilter = $event"
   />
 
   <div class="footer">
@@ -47,6 +49,7 @@ export default {
       tab: 0,
       currentImageUrl: null,
       content: "",
+      curFilter: "",
     };
   },
   components: {
@@ -87,7 +90,7 @@ export default {
         date: "Apr 20",
         liked: false,
         content: this.content,
-        filter: "clarendon",
+        filter: this.curFilter,
       };
       this.posts.unshift(post);
       alert("글 작성 완료!");

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="upload-image"
+    :class="`${curFilter} upload-image`"
     :style="{ backgroundImage: `url(${currentImageUrl})` }"
   ></div>
   <div class="write">
@@ -18,6 +18,7 @@ write!</textarea
 export default {
   props: {
     currentImageUrl: String,
+    curFilter: String,
   },
   data() {
     return {

@@ -1,39 +1,31 @@
 <template>
   <!-- 필터선택페이지 -->
   <div
-    class="upload-image"
+    :class="`${curFilter} upload-image`"
     :style="{ backgroundImage: `url(${currentImageUrl})` }"
   />
   <div class="filters">
-    <div
-      class="filter-1"
-      :style="{ backgroundImage: `url(${currentImageUrl})` }"
-    ></div>
-    <div
-      class="filter-1"
-      :style="{ backgroundImage: `url(${currentImageUrl})` }"
-    ></div>
-    <div
-      class="filter-1"
-      :style="{ backgroundImage: `url(${currentImageUrl})` }"
-    ></div>
-    <div
-      class="filter-1"
-      :style="{ backgroundImage: `url(${currentImageUrl})` }"
-    ></div>
-    <div
-      class="filter-1"
-      :style="{ backgroundImage: `url(${currentImageUrl})` }"
-    ></div>
+    <filter-box
+      v-for="(filter, i) in filters"
+      :key="i"
+      :currentImageUrl="currentImageUrl"
+      :filter="filter"
+      @changeFilter="$emit('changeFilter', $event)"
+    ></filter-box>
   </div>
 </template>
 
 <script>
+import FilterBox from "@/components/FilterBox";
 export default {
   props: {
     currentImageUrl: String,
+    filters: Array,
+    curFilter: String,
   },
-  data() {},
+  components: {
+    FilterBox,
+  },
 };
 </script>
 
@@ -47,28 +39,5 @@ export default {
 .filters {
   overflow-x: scroll;
   white-space: nowrap;
-}
-.filter-1 {
-  width: 100px;
-  height: 100px;
-  background-color: cornflowerblue;
-  margin: 10px 10px 10px auto;
-  padding: 8px;
-  display: inline-block;
-  color: white;
-  background-size: cover;
-}
-.filters::-webkit-scrollbar {
-  height: 5px;
-}
-.filters::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-.filters::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 5px;
-}
-.filters::-webkit-scrollbar-thumb:hover {
-  background: #555;
 }
 </style>
