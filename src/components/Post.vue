@@ -5,11 +5,12 @@
       <span class="profile-name">{{ post.name }}</span>
     </div>
     <div
+      @click="increamentLikes"
       :class="`${post.filter} post-body`"
       :style="{ backgroundImage: `url(${post.postImage})` }"
     ></div>
     <div class="post-content">
-      <p>{{ post.likes }} Likes</p>
+      <p>{{ $store.state.likes }} Likes</p>
       <p>
         <strong>{{ post.name }}</strong> {{ post.content }}
       </p>
@@ -22,6 +23,17 @@
 export default {
   props: {
     post: Object,
+  },
+  data() {
+    return {
+      clickLike: false,
+    };
+  },
+  methods: {
+    increamentLikes() {
+      this.$store.commit("increamentLikes", this.clickLike);
+      this.clickLike = !this.clickLike;
+    },
   },
 };
 </script>

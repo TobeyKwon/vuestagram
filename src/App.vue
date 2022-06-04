@@ -9,7 +9,11 @@
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
-
+  <h4>{{ name }} {{ $store.state.age }}</h4>
+  <button @click="$store.commit('changeName')">버튼1</button>
+  <button @click="$store.commit('increamentAge', 10)">버튼2</button>
+  <button @click="$store.dispatch('getData')">더보기 버튼</button>
+  <h4>{{ $store.state.more }}</h4>
   <Container
     :posts="posts"
     :tab="tab"
@@ -39,6 +43,7 @@
 import Container from "./components/Container.vue";
 import posts from "@/assets/data";
 import http from "@/assets/utils/http";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   name: "App",
@@ -55,7 +60,11 @@ export default {
   components: {
     Container,
   },
+  computed: {
+    ...mapState(["name", "age", "likes"]),
+  },
   methods: {
+    // ...mapMutations([])
     more() {
       http.get(`/more${this.nextPostNum}.json`).then(({ data }) => {
         this.posts.push(data);

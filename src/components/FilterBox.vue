@@ -3,7 +3,9 @@
     :class="`${filter} filter-item`"
     :style="{ backgroundImage: `url(${currentImageUrl})` }"
     @click="$emit('changeFilter', filter)"
-  ></div>
+  >
+    <slot></slot>
+  </div>
 </template>
 
 <script>

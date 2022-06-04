@@ -11,7 +11,8 @@
       :currentImageUrl="currentImageUrl"
       :filter="filter"
       @changeFilter="$emit('changeFilter', $event)"
-    ></filter-box>
+      >{{ filter }}</filter-box
+    >
   </div>
 </template>
 
